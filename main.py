@@ -45,3 +45,21 @@ def get_note(note_id: int, db: Session = Depends(get_db)):
     
     return note
 
+@app.put("/notes/{note_id}", response_model=schemas.NoteResponse)
+
+def update_note(note_id: int, note: schemas.NoteCreate, db: Session = Depends(get_db)):
+    
+    db_note = db.query(models.Note).filter(models.Note.id == note_id).first()
+    
+    if db_note is None:
+        raise HTTPException(status_code=404, detail="Note not found") 
+    
+    db_note.title = note.title
+    db_note.content = note.content
+
+    db.commit()
+    db.refresh(db_note)
+
+    return db_note
+
+
