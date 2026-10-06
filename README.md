@@ -71,10 +71,10 @@ The interactive Swagger UI will be available at `/docs`.
 |--------|------------------|----------------------------|
 | GET    | `/`              | Health check               |
 | POST   | `/notes/`        | Create a new note          |
-| GET    | `/notes/`        | List all Notes             |
+| GET    | `/notes/`        | List all notes             |
 | GET    |`/notes/{note_id}`| Get a note by ID           |
 | PUT    |`/notes/{note_id}`| Update a note by ID        |
-| DELETE |`/notes/{note_id}`| Deleta a note by ID        |
+| DELETE |`/notes/{note_id}`| Delete a note by ID        |
 
 ## Roadmap
 
