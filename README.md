@@ -71,8 +71,9 @@ The interactive Swagger UI will be available at `/docs`.
 |--------|------------------|----------------------------|
 | GET    | `/`              | Health check               |
 | POST   | `/notes/`        | Create a new note          |
-| GET    | `/notes/`        | List Notes                 |
-| GET    |`/notes/{note_id}`| Get Note                   |
+| GET    | `/notes/`        | List all Notes             |
+| GET    |`/notes/{note_id}`| Get a note by ID           |
+
 ## Roadmap
 
 - [x] List all notes (`GET /notes/`)
