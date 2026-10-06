@@ -63,3 +63,14 @@ def update_note(note_id: int, note: schemas.NoteCreate, db: Session = Depends(ge
     return db_note
 
 
+@app.delete("/notes/{note_id}", status_code=204)
+
+def delete_note(note_id: int, db: Session = Depends(get_db)):
+    db_note = db.query(models.Note).filter(models.Note.id == note_id).first()
+
+    if db_note is None:
+        raise HTTPException(status_code=404, detail="Note not found")
+
+    db.delete(db_note)
+    db.commit()
+        
