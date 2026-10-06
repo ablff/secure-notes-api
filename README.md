@@ -67,15 +67,16 @@ The interactive Swagger UI will be available at `/docs`.
 
 ## Current Endpoints
 
-| Method | Path       | Description                |
-|--------|------------|----------------------------|
-| GET    | `/`        | Health check               |
-| POST   | `/notes/`  | Create a new note          |
-
+| Method | Path             | Description                |
+|--------|------------------|----------------------------|
+| GET    | `/`              | Health check               |
+| POST   | `/notes/`        | Create a new note          |
+| GET    | `/notes/`        | List Notes                 |
+| GET    |`/notes/{note_id}`| Get Note                   |
 ## Roadmap
 
-- [ ] List all notes (`GET /notes/`)
-- [ ] Get a note by ID (`GET /notes/{note_id}`)
+- [x] List all notes (`GET /notes/`)
+- [x] Get a note by ID (`GET /notes/{note_id}`)
 - [ ] Update a note
 - [ ] Delete a note
 - [ ] Length validation for note fields
