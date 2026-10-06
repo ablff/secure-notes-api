@@ -1,22 +1,25 @@
 # Secure Notes API
 
-A secure backend API built for portfolio evaluation, featuring data validation, ORM mapping, and robust database integration.
+A backend API for storing notes, built as a portfolio project to practice REST API design with FastAPI, SQLAlchemy and PostgreSQL.
 
 ## Tech Stack
 
-- Python (Programming Language)
-- FastAPI (Web Framework & ASGI)
-- SQLAlchemy (Object-Relational Mapper)
-- PostgreSQL (Relational Database)
-- Docker (Containerization)
-- Pydantic (Data Validation)
+- Python 3.10+
+- FastAPI (web framework)
+- Uvicorn (ASGI server)
+- SQLAlchemy (ORM)
+- PostgreSQL (relational database, running in Docker)
+- Psycopg2 (PostgreSQL driver)
+- Pydantic (data validation)
+- python-dotenv (environment variable loading)
 
-## Architecture & Features
+## Features
 
-- Database Integration: Managed via PostgreSQL running inside a Docker container with strict network mapping.
-- ORM Layer: Uses SQLAlchemy models to map Python classes to relational tables securely, preventing SQL injection vulnerabilities.
-- Data Validation: Request payload validation handled via Pydantic schemas separating API contracts from database models.
-- Dependency Injection: Robust database session lifecycle management ensuring connection cleanup and thread safety.
+- **Database integration:** PostgreSQL running in a Docker container.
+- **ORM layer:** SQLAlchemy models with parameterized queries, which mitigates SQL injection.
+- **Data validation:** Pydantic schemas separate the API contract from the database models.
+- **Session management:** a `get_db` dependency opens one database session per request and always closes it.
+- **Configuration:** credentials are loaded from environment variables and are never stored in the code.
 
 ## Getting Started
 
@@ -25,19 +28,55 @@ A secure backend API built for portfolio evaluation, featuring data validation, 
 - Python 3.10+
 - Docker
 
-### Environment Setup
+### Setup
 
 1. Clone the repository:
-   git clone [https://github.com/ablff/secure-notes-api.git](https://github.com/ablff/secure-notes-api.git)
+
+```
+   git clone https://github.com/ablff/secure-notes-api.git
    cd secure-notes-api
+```
 
-2. Start the PostgreSQL database using Docker:
-    docker run --name secure-notes-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=adminpass -e POSTGRES_DB=notes_db -p 5432:5432 -d postgres:15-alpine
+2. Create your environment file from the example:
 
-3. Install dependencies:
-    pip install -r requirements.txt
+```
+   cp .env.example .env
+```
 
-4. Run the development server:
-    uvicorn main:app --reload
+   Then edit `.env` and replace the placeholder password with your own.
 
-API documentation and interective Swagger UI will be available at /docs
+3. Start the PostgreSQL container. The password must match the one in your `.env`:
+
+```
+   docker run --name secure-notes-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=your_password_here -e POSTGRES_DB=notes_db -p 5432:5432 -d postgres:15-alpine
+```
+
+4. Install the dependencies:
+
+```
+   pip install -r requirements.txt
+```
+
+5. Run the development server:
+
+```
+   uvicorn main:app --reload
+```
+
+The interactive Swagger UI will be available at `/docs`.
+
+## Current Endpoints
+
+| Method | Path       | Description                |
+|--------|------------|----------------------------|
+| GET    | `/`        | Health check               |
+| POST   | `/notes/`  | Create a new note          |
+
+## Roadmap
+
+- [ ] List all notes (`GET /notes/`)
+- [ ] Get a note by ID (`GET /notes/{note_id}`)
+- [ ] Update a note
+- [ ] Delete a note
+- [ ] Length validation for note fields
+- [ ] Automated tests
