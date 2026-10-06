@@ -73,12 +73,13 @@ The interactive Swagger UI will be available at `/docs`.
 | POST   | `/notes/`        | Create a new note          |
 | GET    | `/notes/`        | List all Notes             |
 | GET    |`/notes/{note_id}`| Get a note by ID           |
+| PUT    |`/notes/{note_id}`| Update route for notes     |
 
 ## Roadmap
 
 - [x] List all notes (`GET /notes/`)
 - [x] Get a note by ID (`GET /notes/{note_id}`)
-- [ ] Update a note
+- [x] Update a note (`PUT"/notes/{note_id}`)
 - [ ] Delete a note
 - [ ] Length validation for note fields
 - [ ] Automated tests
