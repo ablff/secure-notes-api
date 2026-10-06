@@ -82,5 +82,5 @@ The interactive Swagger UI will be available at `/docs`.
 - [x] Get a note by ID (`GET /notes/{note_id}`)
 - [x] Update a note (`PUT /notes/{note_id}`)
 - [x] Delete a note (`DELETE /notes/{note_id}`)
-- [ ] Length validation for note fields
+- [x] Length validation for note fields
 - [ ] Automated tests
