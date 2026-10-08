@@ -64,3 +64,20 @@ def test_get_note_not_found():
 
     assert response.status_code == 404
     assert response.json()["detail"] == "Note not found"
+
+def test_list_notes_empty():
+
+    response = client.get("/notes/")
+
+    assert response.status_code == 200
+    assert response.json() == []
+
+def test_list_notes_one():
+    client.post("/notes/", json={"title": "A", "content": "B"})
+
+    response = client.get("/notes/")
+    data =response.json()
+
+    assert response.status_code == 200
+    assert len(data) == 1
+    assert data[0]["title"] == "A"
