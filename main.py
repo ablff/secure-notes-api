@@ -17,7 +17,7 @@ def get_db():
 
 @app.get("/")
 def health_check():
-    return {"status": "sucess", "message": "Secure Vault is online and connected"}
+    return {"status": "success", "message": "Secure Vault is online and connected"}
 
 
 @app.post("/notes/", response_model=schemas.NoteResponse)
