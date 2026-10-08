@@ -41,3 +41,26 @@ def test_create_note():
     assert data["title"] == "Test"
     assert data["content"] == "Hello"
     assert "id" in data
+
+def test_health_check():
+    response = client.get("/")
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "success"
+
+def test_get_note_by_id():
+    created = client.post("/notes/", json={"title": "A", "content": "B"})
+    note_id = created.json()["id"]
+
+    response = client.get(f"/notes/{note_id}")
+
+    assert response.status_code == 200
+    assert response.json()["title"] == "A"
+
+
+def test_get_note_not_found():
+
+    response = client.get("/notes/999")
+
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Note not found"
